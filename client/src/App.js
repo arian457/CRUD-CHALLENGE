@@ -1,9 +1,11 @@
 const Axios = require('axios')
 const {useState, useEffect} = require('react')
 import './App.css';
+import List from './components/Lists'
+
 
 function App() {
-  const [currVal, setVal] = useState(0)
+  const [balance, setBalance] = useState(0)
   const [state, setState] = useState({
     concept: '',
     amount: 0,
@@ -15,7 +17,7 @@ function App() {
     setState({...state, [e.target.name]:e.target.value})
   }
   const handleSubmit = () => {
-   Axios.post('http://localhost:3001/api', {
+   Axios.post('http://localhost:3001/', {
       concept: state.concept,
       mount: state.mount,
       type: state.type,
@@ -24,15 +26,16 @@ function App() {
 
   }
   useEffect(() => {
-    Axios.get('http://localhost:3001/api')
+    Axios.get('http://localhost:3001/balance')
     .then((response) => {
-      setVal(response.data)
+      setBalance(response.data)
     })
-   }, [])
+    .catch(error => alert(error))
+    }, [])
   
   return (
     <div className="App">
-      <h1> BALANCE ACTUAL ${currVal} </h1>
+      <h1> BALANCE ACTUAL ${balance} </h1>
      
       <form className= 'form-group'>
       <div>
@@ -56,7 +59,8 @@ function App() {
       <button onClick={handleSubmit}>Enviar</button>
       </form>
       <div className='op-list'>
-
+        <h2>Registro de operaciones:</h2>
+         <List/>
       </div>
     </div>
   );
