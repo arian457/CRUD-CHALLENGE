@@ -15,7 +15,7 @@ const Entries = db.define('ingresos',{
      amount: {
          type: DataTypes.INTEGER,
          allowNull: false,
-         defaultValue: 0
+      
      },
      type: {
          type: DataTypes.ENUM('ingreso', 'egreso')
@@ -34,7 +34,7 @@ const Expenses = db.define('egresos',{
     amount: {
         type: DataTypes.INTEGER,
         allowNull: false,
-        defaultValue:0
+     
     },
     type: {
         type: DataTypes.ENUM('ingreso', 'egreso')

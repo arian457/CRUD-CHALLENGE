@@ -3,7 +3,7 @@ const router = express.Router()
 const {db, Entries, Expenses} = require('../models')
 
 const reducer = (curr, acc) => curr - acc
-router.post('/api',  (req, res) => {
+router.post('/',  (req, res) => {
    const {concept, mount, type, category} = req.body 
    if(type === 'ingreso'){
        Entries.create({
@@ -21,7 +21,20 @@ router.post('/api',  (req, res) => {
     })
    }
 })
-router.get('/api', (req, res) => {
+router.delete('/delete', (req, res) => {
+    const {id, type} = req.body
+    if(type === 'ingreso') {
+        Entries.destroy({where:{
+            id : id
+        }})
+        res.send('lito!')
+    }
+    else if(type === 'egreso') {
+        res.send('ingreso')
+    }
+    else res.sendStatus(400)
+})
+router.get('/balance', (req, res) => {
    Promise.all([Entries.sum('amount'), Expenses.sum('amount')])
    .then(values => {
        values = values.map(val => {
@@ -35,4 +48,10 @@ router.get('/api', (req, res) => {
    .catch(error => console.log(error))
    
 })
+router.get('/', (req, res) => {
+   Promise.all([Entries.findAll({}),
+                Expenses.findAll({})])
+          .then(values => res.json(values))
+})
+
 module.exports = router
