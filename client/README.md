@@ -4,6 +4,7 @@ Este es el lado del cliente, renderizado con REACT y conectado al servidor media
 
 ## Scripts para correr el proyecto:
 
+### `npm install`
 
 ### `npm start`
 
@@ -11,6 +12,8 @@ Este es el lado del cliente, renderizado con REACT y conectado al servidor media
 Abrí [http://localhost:3000](http://localhost:3000) para ver la interfaz cliente en tu navegador.
 
 
-## `para que el proyecto funcione correctamente tambien se tendrá que correr el lado del server`
+### `para que el proyecto funcione correctamente tambien se tendrá que correr el lado del servidor`
 
-### mas info en el readme ubicado en [../server](../server.README.md)
+### `npm install` en: [../server](../server.README.md)
+
+### `npm start`
