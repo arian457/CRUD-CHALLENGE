@@ -1,22 +1,35 @@
 .App {
   text-align: center;
 }
-.form-group{
+.hero-group{    border: azure;
+  border-style: groove;
+  background: aliceblue;
+}
+#form-group{
   display: flex;
   width: 500px;
   height: 400px;
   margin: auto;
-  background: cornsilk;
   justify-content: space-evenly;
   flex-direction: column;
   align-items: center;
 }
+.disable{
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+  border-radius: 4px;
+  font-size: 16px;
+  padding:10%
+}
+#balance {
+  font-size: xx-large;
+}
+.op-list > h2 {
+  background: gray;
+    color: aliceblue;
+    padding: 20px;
 
-
-.btn-group{
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
 }
 
 .div-item{

@@ -37,26 +37,26 @@ function App() {
   
   return (
     <div className="App">
-      <h1> BALANCE ACTUAL ${balance} </h1>
+      <div className = 'hero-group'>
+      <h1 className="badge bg-primary" id= 'balance'> BALANCE ACTUAL ${balance} </h1>
      
-      <form className= 'form-group'>
-      <div className='div-item'>
-      <label>Tipo</label>
-        <input  type='button'  onClick={() => setForm({...form, type : 'ingreso'})} value='+'/>
-        <input type='button' onClick={() => setForm({...form, type : 'egreso'}) } value='-'/>
+      <form id= 'form-group' >
+     
+      <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+        <input  type='button' id='btn-1' className={form.type === 'ingreso' ? "btn btn-secondary btn-lg" : "btn btn-success"} onClick={() => setForm({...form, type : 'ingreso'})} value='Ingreso'/>
+        <input type='button' id='btn-2'className={form.type === 'egreso' ? "btn btn-secondary btn-lg" :  "btn btn-danger"} onClick={() => setForm({...form, type : 'egreso'}) } value='Egreso'/>
       </div>
       <div className='div-item'>
-       <label>Concepto   </label>
-        <input type='text' placeholder='concepto' name='concept' onChange={(e) => handleChanges(e)}></input>
+      
+        <input type='text' class="form-control" placeholder='Concepto' name='concept' onChange={(e) => handleChanges(e)}></input>
       </div>
       <div  className='div-item'>
-       <label>Monto   </label>
-        <input type= 'number' placeholder= 'monto' name= 'amount' onChange={(e) => handleChanges(e)}></input>
+        <input type= 'number' class="form-control" placeholder= 'Monto' name= 'amount' onChange={(e) => handleChanges(e)}></input>
       </div>
       <div className = 'div-item'>
-       <label>Categoria</label>
-        <select id="category" name="category" onChange={(e) => handleChanges(e)}>
-        <option hidden selected>Selecciona una opción</option>
+
+        <select  class="form-select"  name="category" onChange={(e) => handleChanges(e)}>
+        <option hidden selected>Seleccione una categoria...</option>
           <option value="comida">Comida</option>
           <option value="alquiler/expensas">Alquiler(expensas)</option>
           <option value="fiat">Fiat</option>
@@ -64,11 +64,14 @@ function App() {
         </select>
       </div>
       <div  className='div-item'>
-      <button onClick={handleSubmit}>Enviar</button>
+      <button class="btn btn-success" onClick={handleSubmit}>Aceptar</button>
       </div>
+
       </form>
+      </div>
       <div className='op-list'>
-        <h2>Registro de operaciones:</h2>
+        <h2 >Registro de operaciones:</h2>
+        
          <List />
       </div>
     </div>
