@@ -9,12 +9,12 @@ el cliente lo vaya requeriendo
 ### `npm start`
 
 ### adicionalmente se tendra que crear un archivo llamado .env en la carpeta principal [../server] con los siguientes parametros:
-`DB_DIALECT=*nombre del dialecto SQL utilizado*`    
-`DB_USER=*el usuario para manipular la BDD*`
 
-`DB_PASSWORD=*la contraseña establecida*`
-`DB_HOST=localhost:*N° de puerto elegido*`
-`DB_NAME=*nombre de la base de datos a la que se conectará*`
+`DB_DIALECT=*nombre del dialecto SQL utilizado*`    
+`DB_USER=*el usuario para manipular la BDD*`          
+`DB_PASSWORD=*la contraseña establecida*`          
+`DB_HOST=localhost:*N° de puerto elegido*`            
+`DB_NAME=*nombre de la base de datos a la que se conectará*`             
 
 completar cada * con sus correspondientes datos
 
