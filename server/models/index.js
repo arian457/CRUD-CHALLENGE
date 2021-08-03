@@ -1,5 +1,5 @@
 const {Sequelize, DataTypes} = require('sequelize');
-const { set } = require('..');
+
 
 const db = new Sequelize('postgres://postgres:santiari601@localhost:3002/abm-db', {
   logging: false,
@@ -7,7 +7,12 @@ const db = new Sequelize('postgres://postgres:santiari601@localhost:3002/abm-db'
 db.authenticate().then((res) => console.log("todo joya")).catch((error) => console.log(error))
 
 
-const Entries = db.define('ingresos',{
+const Operations = db.define('operaciones',{
+    id:{
+        type:DataTypes.INTEGER,
+        autoIncrement:true,
+        primaryKey:true
+    },
      concept:{
          type: DataTypes.STRING,
          allowNull:false
@@ -18,38 +23,25 @@ const Entries = db.define('ingresos',{
       
      },
      type: {
-         type: DataTypes.ENUM('ingreso', 'egreso')
+         type: DataTypes.ENUM('ingreso', 'egreso'),
+         allowNull: false,
+         primaryKey:true
      },
      category: {
          type: DataTypes.STRING,
          allowNull:false
-     }
+     },
+     date: {
+        type: DataTypes.DATE,
+        defaultValue: db.literal('CURRENT_TIMESTAMP'),
+        allowNull:false
+    },
 
-})
-const Expenses = db.define('egresos',{
-    concept:{
-        type: DataTypes.STRING,
-        allowNull:false
-    },
-    amount: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-     
-    },
-    type: {
-        type: DataTypes.ENUM('ingreso', 'egreso')
-    },
-    category: {
-        type: DataTypes.STRING,
-        allowNull:false
-    },
-  
-})
+},{createdAt: false})
+
 
 
 module.exports = {
     db,
-    Entries,
-    Expenses
-
+    Operations
 }

@@ -1,26 +1,31 @@
-const express = require('express')
-const morgan = require('morgan')
-const homeRoute = require('./routes')
-var cors = require('cors')
-//inicializaciones
+//                       _oo0oo_
+//                      o8888888o
+//                      88" . "88
+//                      (| -_- |)
+//                      0\  =  /0
+//                    ___/`---'\___
+//                  .' \\|     |// '.
+//                 / \\|||  :  |||// \
+//                / _||||| -:- |||||- \
+//               |   | \\\  -  /// |   |
+//               | \_|  ''\---/''  |_/ |
+//               \  .-\__  '-'  ___/-. /
+//             ___'. .'  /--.--\  `. .'___
+//          ."" '<  `.___\_<|>_/___.' >' "".
+//         | | :  `- \`.;`\ _ /`;.`/ - ` : | |
+//         \  \ `_.   \_ __\ /__ _/   .-` /  /
+//     =====`-.____`.___ \_____/___.-`___.-'=====
+//                       `=---='
+//     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-const app = express()
-
-//configuraciones
-
-app.set('port', process.env.PORT || 3001);
-
-//Middlewares
-
-app.use(cors())
-app.use(morgan('dev'));
-app.use(express.urlencoded({extended : false}))
-app.use(express.json())
+const app = require('./app')
+const {db} = require('./models')
 
 
-//Rutas
-
-app.use('/', homeRoute)
-
-module.exports = app
+db.sync()
+    .then(() => {
+        app.listen(3001, function () {
+            console.log('Server is listening on port 3001!');
+        });
+    });
 

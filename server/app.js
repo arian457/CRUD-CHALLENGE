@@ -1,11 +1,26 @@
-const app = require('./index')
-const {db} = require('./models')
+const express = require('express')
+const morgan = require('morgan')
+const homeRoute = require('./routes')
+var cors = require('cors')
+//inicializaciones
 
-const force = true;
-db.sync({ force })
-    .then(function () {
-        app.listen(3001, function () {
-            console.log('Server is listening on port 3001!');
-        });
-    });
+const app = express()
+
+//configuraciones
+
+app.set('port', process.env.PORT || 3001);
+
+//Middlewares
+
+app.use(cors())
+app.use(morgan('dev'));
+app.use(express.urlencoded({extended : false}))
+app.use(express.json())
+
+
+//Rutas
+
+app.use('/', homeRoute)
+
+module.exports = app
 
