@@ -1,10 +1,11 @@
 const {Sequelize, DataTypes} = require('sequelize');
-
-
-const db = new Sequelize('postgres://postgres:santiari601@localhost:3002/abm-db', {
+require('dotenv').config();
+const {DB_DIALECT, DB_USER, DB_PASSWORD,DB_HOST, DB_NAME} = process.env
+const db = new Sequelize(`${DB_DIALECT}://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`, {
   logging: false,
 });
-db.authenticate().then((res) => console.log("todo joya")).catch((error) => console.log(error))
+db.authenticate().then((res) => console.log("DB is connected!"))
+.catch((error) => console.log(error))
 
 
 const Operations = db.define('operaciones',{
