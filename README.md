@@ -7,6 +7,6 @@
 
 <h3 align="left">Mi contacto:</h3>
 <p align="left">
-<a href="https://linkedin.com/in/arian cejas" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/linked-in-alt.svg" alt="arian cejas" height="30" width="40" /></a>
+<a href="https://www.linkedin.com/in/arian-cejas-559b03172/" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/linked-in-alt.svg" alt="arian cejas" height="30" width="40" /></a>
 </p>
 
