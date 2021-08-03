@@ -1,3 +1,26 @@
 .App {
   text-align: center;
 }
+.form-group{
+  display: flex;
+  width: 500px;
+  height: 400px;
+  margin: auto;
+  background: cornsilk;
+  justify-content: space-evenly;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+.btn-group{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.div-item{
+  font-size: 150%;
+  display: flex;
+  flex-direction: row;
+}

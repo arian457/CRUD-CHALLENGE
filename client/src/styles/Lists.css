@@ -1,9 +1,24 @@
 .list-div {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-evenly;
-
 }
 .list-container{
-    display:block
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+
+}
+strong{
+    margin-left: 2%;
+}
+ul{
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    flex-wrap: nowrap;
+
+}
+ul > input[type="text" i] {
+   width:5%;
 }

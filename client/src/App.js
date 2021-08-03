@@ -1,12 +1,13 @@
 const Axios = require('axios')
 const {useState, useEffect} = require('react')
 import './App.css';
+import FilterInput from './components/FilterInput';
 import List from './components/Lists'
 
 
 function App() {
   const [balance, setBalance] = useState(0)
-  const [state, setState] = useState({
+  const [form, setForm] = useState({
     concept: '',
     amount: 0,
     type : '',
@@ -14,19 +15,20 @@ function App() {
   })
 
   const handleChanges = (e) =>{
-    setState({...state, [e.target.name]:e.target.value})
+    setForm({...form, [e.target.name]:e.target.value})
   }
   const handleSubmit = () => {
-   Axios.post('http://localhost:3001/', {
-      concept: state.concept,
-      mount: state.mount,
-      type: state.type,
-      category: state.category
+    form.amount = parseInt(form.amount)
+   Axios.post('http://localhost:3001/create/post', {
+      concept: form.concept,
+      amount: form.amount,
+      type: form.type,
+      category: form.category
    })
 
   }
   useEffect(() => {
-    Axios.get('http://localhost:3001/balance')
+    Axios.get('http://localhost:3001/')
     .then((response) => {
       setBalance(response.data)
     })
@@ -38,29 +40,36 @@ function App() {
       <h1> BALANCE ACTUAL ${balance} </h1>
      
       <form className= 'form-group'>
-      <div>
+      <div className='div-item'>
+      <label>Tipo</label>
+        <input  type='button'  onClick={() => setForm({...form, type : 'ingreso'})} value='+'/>
+        <input type='button' onClick={() => setForm({...form, type : 'egreso'}) } value='-'/>
+      </div>
+      <div className='div-item'>
        <label>Concepto   </label>
         <input type='text' placeholder='concepto' name='concept' onChange={(e) => handleChanges(e)}></input>
       </div>
-      <div>
+      <div  className='div-item'>
        <label>Monto   </label>
-        <input type= 'number' placeholder= 'monto' name= 'mount' onChange={(e) => handleChanges(e)}></input>
+        <input type= 'number' placeholder= 'monto' name= 'amount' onChange={(e) => handleChanges(e)}></input>
       </div>
-      <div>
+      <div className = 'div-item'>
        <label>Categoria</label>
-        <input type ='text' placeholder='categoria' name= 'category' onChange={(e) => handleChanges(e)}></input>
+        <select id="category" name="category" onChange={(e) => handleChanges(e)}>
+        <option hidden selected>Selecciona una opción</option>
+          <option value="comida">Comida</option>
+          <option value="alquiler/expensas">Alquiler(expensas)</option>
+          <option value="fiat">Fiat</option>
+          <option value="audi">Audi</option>
+        </select>
       </div>
-      <label>Tipo</label>
-      <div className='btn-group'>
-        <input  type='button'  onClick={() => setState({...state, type : 'ingreso'})} value='+'/>
-        <input type='button' onClick={() => setState({...state, type : 'egreso'}) } value='-'/>
-      </div>
-      
+      <div  className='div-item'>
       <button onClick={handleSubmit}>Enviar</button>
+      </div>
       </form>
       <div className='op-list'>
         <h2>Registro de operaciones:</h2>
-         <List/>
+         <List />
       </div>
     </div>
   );
