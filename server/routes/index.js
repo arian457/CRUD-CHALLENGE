@@ -11,7 +11,9 @@ router.post('/create/post',  (req, res) => {
            type,
            category
 
-}) })
+})
+     res.send("done")
+ })
 
 router.put('/update/post', async(req, res) => {
     
@@ -22,14 +24,14 @@ router.put('/update/post', async(req, res) => {
               id: id
           }
       })
-  
+      res.send("done")
 })
 router.delete('/delete/post', (req, res) => {
         const {id} = req.body
         Operations.destroy({where:{
             id : id
         }})
-        res.send('lito!')
+        res.send("done")
 
 })
 router.get('/', (req, res) => {
