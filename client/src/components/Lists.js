@@ -1,12 +1,11 @@
+import '../styles/Lists.css'
+import Filter from './Filter.js'
 const Axios = require('axios')
 const {useState, useEffect} = require('react')
-import axios from 'axios'
-import '../styles/Lists.css'
-import FilterInput from './FilterInput'
 
 
 
-export default function List () {
+export default function List ({setBalance}) {
   const [operations, setOperations] = useState([])
   const [edit, setEdit] = useState({
       id: "",
@@ -15,7 +14,7 @@ export default function List () {
       category: ""
   })
     useEffect( () => {
-      return Axios.get('http://localhost:3001/all')
+       Axios.get('http://localhost:3001/all')
      .then((response) => setOperations(response.data)) 
      .catch(error => alert(error))
 
@@ -30,7 +29,7 @@ export default function List () {
         }
         return op
       }))
-      axios.put('http://localhost:3001/update/post',{
+      Axios.put('http://localhost:3001/update/post',{
         id, 
         amount,
         concept,
@@ -39,13 +38,17 @@ export default function List () {
     }
     
     const removeClick = (id ) => {
-     setOperations(operations => operations.filter(op => op.id !== id))
+     setOperations(operations => operations.filter(op =>  op.id !== id))
      Axios.delete('http://localhost:3001/delete/post',{ data:{id}})
-     
+     Axios.get('http://localhost:3001/')
+    .then((response) => {
+      setBalance(response.data)
+    })
     }
   return (
     <div className = 'list-container'>
-     <FilterInput setOperations = {setOperations} props = {operations} />
+      
+     <Filter props = {operations} />
          <div className='list-div'> 
        <label class="card-header">INGRESOS</label>
            { operations ? operations.map(operation => {
@@ -89,7 +92,7 @@ export default function List () {
                <strong>Categoria:</strong>{operation.category}
                </div>
                <div>
-               <button class="btn btn-danger" onClick={() => removeClick(operation.id, operation.type)}><i class="bi bi-x-square"></i></button>
+               <button class="btn btn-danger" onClick={() => removeClick(operation.id)}><i class="bi bi-x-square"></i></button>
                {edit.id !== operation.id ? <button class="btn btn-primary" onClick={() => setEdit({id:operation.id, amount: operation.amount, concept: operation.concept})} ><i class="bi bi-clipboard-check"></i></button> : 
                                 <button class="btn btn-primary" onClick={() => {
                                 editer(operation.id, edit.amount, edit.concept)
