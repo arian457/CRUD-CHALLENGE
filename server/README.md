@@ -20,4 +20,4 @@ completar cada * con sus correspondientes datos
 
 ## `para que el proyecto funcione correctamente tambien se tendrá que correr el lado del cliente`
 
-### mas info en el readme ubicado en [../client](../client.README.md)
+### mas info en el readme ubicado en [../client](../client/README.md)
