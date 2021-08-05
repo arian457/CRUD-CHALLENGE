@@ -1,8 +1,8 @@
+import './App.css';
+import List from './components/Lists'
 const Axios = require('axios')
 const {useState, useEffect} = require('react')
-import './App.css';
-import FilterInput from './components/FilterInput';
-import List from './components/Lists'
+
 
 
 function App() {
@@ -17,7 +17,7 @@ function App() {
   const handleChanges = (e) =>{
     setForm({...form, [e.target.name]:e.target.value})
   }
-  const handleSubmit = () => {
+  const handleSubmit =  () => {
     form.amount = parseInt(form.amount)
    Axios.post('http://localhost:3001/create/post', {
       concept: form.concept,
@@ -33,7 +33,7 @@ function App() {
       setBalance(response.data)
     })
     .catch(error => alert(error))
-    }, [])
+    }, [setBalance])
   
   return (
     <div className="App">
@@ -55,24 +55,32 @@ function App() {
       </div>
       <div className = 'div-item'>
 
-        <select  class="form-select"  name="category" onChange={(e) => handleChanges(e)}>
+       {form.type === 'egreso' && <select  class="form-select"  name="category" onChange={(e) => handleChanges(e)}>
         <option hidden selected>Seleccione una categoria...</option>
-          <option value="comida">Comida</option>
-          <option value="alquiler/expensas">Alquiler(expensas)</option>
-          <option value="fiat">Fiat</option>
-          <option value="audi">Audi</option>
+          <option value="Comida">Comida</option>
+          <option value="Alquiler/Expensas">Alquiler/Expensas</option>
+          <option value="Ocio">Ocio</option>
+          <option value="Servicios">Servicios</option>
         </select>
+        }
+         {form.type === 'ingreso' && <select  class="form-select"  name="category" onChange={(e) => handleChanges(e)}>
+        <option hidden selected>Seleccione una categoria...</option>
+          <option value="Sueldo">Sueldo</option>
+          <option value="Ventas">Ventas</option>
+          <option value="Cuenta pendiente">Cuenta pendiente</option>
+          <option value="Ganancias(inversiones)">Inversiones</option>
+        </select>
+        }
       </div>
       <div  className='div-item'>
-      <button class="btn btn-success" onClick={handleSubmit}>Aceptar</button>
+      {form.concept && form.type && form.amount &&form.category ? <button class="btn btn-success" onClick={handleSubmit}>Aceptar</button> : <button class="btn btn-success" disabled>Complete todos los campos</button> }
       </div>
 
       </form>
       </div>
       <div className='op-list'>
         <h2 >Registro de operaciones:</h2>
-        
-         <List />
+         <List setBalance ={setBalance} />
       </div>
     </div>
   );
